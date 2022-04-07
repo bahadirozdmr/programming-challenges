@@ -27,9 +27,22 @@ public class ProgrammingChallengeTest {
         assertNotEquals(response,-1);
     }
 
+    @ParameterizedTest
+    @MethodSource("generateWeightedPathSource")
+    void weightedPath(String[] strArray) {
+       WeightedPath weightedPath=new WeightedPath();
+        var response=weightedPath.findMinimumPath(strArray);
+        assertNotEquals(response,-1);
+    }
+
     private static Stream<Arguments> generateCityTrafficSource() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1:[5]", "4:[5]", "3:[5]", "5:[1,4,3,2]", "2:[5,15,7]", "7:[2,8]", "8:[7,38]", "15:[2]", "38:[8]"}));
+    }
+
+    private static Stream<Arguments> generateWeightedPathSource(){
+       return Stream.of(
+                Arguments.of((Object)new String[]{"7","A","B","C","D","E","F","G","A|B|1","A|E|9","B|C|2","C|D|1","D|F|2","E|D|6","F|G|2"}));
     }
 }
 

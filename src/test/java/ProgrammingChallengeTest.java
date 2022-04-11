@@ -1,16 +1,7 @@
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,6 +33,15 @@ public class ProgrammingChallengeTest {
         assertEquals(actualResponse, response);
     }
 
+    @ParameterizedTest
+    @MethodSource("generateVertexConverting")
+    void vertexConvering(String[] strArrays,String result) {
+       VertexConvering vertexConvering=new VertexConvering();
+       var output=vertexConvering.covering(strArrays);
+       assertEquals(output,result);
+
+    }
+
     private static Stream<Arguments> generateCityTrafficSource() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1:[5]", "4:[5]", "3:[5]", "5:[1,4,3,2]", "2:[5,15,7]", "7:[2,8]", "8:[7,38]", "15:[2]", "38:[8]"}));
@@ -55,6 +55,11 @@ public class ProgrammingChallengeTest {
     private static Stream<Arguments> generateFarthestNodeSource(){
         return Stream.of(
                 Arguments.of(new String[]{"a-b","b-c","b-d"},2),Arguments.of(new String[]{ "b-e","b-c","c-d","a-b","e-f" },4));
+    }
+
+    private static  Stream<Arguments> generateVertexConverting(){
+        return Stream.of(
+                Arguments.of(new String[]{"(A,B,C,D)","(A-B,A-D,B-D,A-C)","(A,B)"},"yes"),Arguments.of(new String[]{"(A,B,C,D)","(A-B,A-D,B-D,A-C)","(C,B)"},"(A-D)"));
     }
 }
 

@@ -42,6 +42,14 @@ public class ProgrammingChallengeTest {
 
     }
 
+    @ParameterizedTest
+    @MethodSource("generateHamiltonianPath")
+    void hamiltonianPath(String[] strArrays,String result) {
+       HamiltonianPath path=new HamiltonianPath();
+       var output=path.findPath(strArrays);
+        assertEquals(output,result);
+    }
+
     private static Stream<Arguments> generateCityTrafficSource() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1:[5]", "4:[5]", "3:[5]", "5:[1,4,3,2]", "2:[5,15,7]", "7:[2,8]", "8:[7,38]", "15:[2]", "38:[8]"}));
@@ -60,6 +68,13 @@ public class ProgrammingChallengeTest {
     private static  Stream<Arguments> generateVertexConverting(){
         return Stream.of(
                 Arguments.of(new String[]{"(A,B,C,D)","(A-B,A-D,B-D,A-C)","(A,B)"},"yes"),Arguments.of(new String[]{"(A,B,C,D)","(A-B,A-D,B-D,A-C)","(C,B)"},"(A-D)"));
+    }
+
+    private static  Stream<Arguments> generateHamiltonianPath(){
+        return Stream.of(
+                Arguments.of(new String[]{"(A,B,C,D)","(A-B,A-D,B-D,A-C)","(C,A,D,B)"},"yes"),Arguments.of(new String[]{"(X,Y,Z,Q)","(X-Y,Y-Q,Y-Z)","(Z,Y,Q,X)"},"Q"),
+                Arguments.of(new String[]{"(A,B,C)","(B-A,C-B)","(C,B,A)"},"yes")
+                );
     }
 }
 

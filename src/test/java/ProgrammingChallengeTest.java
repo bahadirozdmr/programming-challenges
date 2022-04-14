@@ -50,6 +50,14 @@ public class ProgrammingChallengeTest {
         assertEquals(output,result);
     }
 
+    @ParameterizedTest
+    @MethodSource("generateKaprekarsConstant")
+    void kaprekarsConstantant(int number,int result) {
+       KaprekarsConstant kaprekars=new KaprekarsConstant();
+       var output=kaprekars.performKaprekars(number);
+        assertEquals(output,result);
+    }
+
     private static Stream<Arguments> generateCityTrafficSource() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1:[5]", "4:[5]", "3:[5]", "5:[1,4,3,2]", "2:[5,15,7]", "7:[2,8]", "8:[7,38]", "15:[2]", "38:[8]"}));
@@ -75,6 +83,12 @@ public class ProgrammingChallengeTest {
                 Arguments.of(new String[]{"(A,B,C,D)","(A-B,A-D,B-D,A-C)","(C,A,D,B)"},"yes"),Arguments.of(new String[]{"(X,Y,Z,Q)","(X-Y,Y-Q,Y-Z)","(Z,Y,Q,X)"},"Q"),
                 Arguments.of(new String[]{"(A,B,C)","(B-A,C-B)","(C,B,A)"},"yes")
                 );
+    }
+
+    private static  Stream<Arguments> generateKaprekarsConstant(){
+        return Stream.of(
+                Arguments.of(1495,3),Arguments.of(3524,3),Arguments.of(2111,5),Arguments.of(9831,7)
+        );
     }
 }
 

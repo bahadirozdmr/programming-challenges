@@ -1,6 +1,8 @@
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import string.MinimumDeletion;
+import string.Palindrome;
 
 import java.util.stream.Stream;
 
@@ -58,6 +60,22 @@ public class ProgrammingChallengeTest {
         assertEquals(output,result);
     }
 
+    @ParameterizedTest
+    @MethodSource("generateMinDeletionSource")
+    void generateMinDeletion(String s,int result) {
+        var minDeletion=new MinimumDeletion();
+        var response=minDeletion.minDeletions(s);
+        assertEquals(result,response);
+    }
+
+    @ParameterizedTest
+    @MethodSource("generatePalindromeSource")
+    void generatePalindromeSource(String s,int result) {
+       var palindrome=new Palindrome();
+       var response=palindrome.minMovesToMakePalindrome(s);
+       assertEquals(result,response);
+    }
+
     private static Stream<Arguments> generateCityTrafficSource() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1:[5]", "4:[5]", "3:[5]", "5:[1,4,3,2]", "2:[5,15,7]", "7:[2,8]", "8:[7,38]", "15:[2]", "38:[8]"}));
@@ -90,6 +108,19 @@ public class ProgrammingChallengeTest {
                 Arguments.of(1495,3),Arguments.of(3524,3),Arguments.of(2111,5),Arguments.of(9831,7)
         );
     }
+    private static  Stream<Arguments> generateMinDeletionSource(){
+        return Stream.of(
+                Arguments.of("aaabbbcc",2)
+        );
+    }
+
+    private static Stream<Arguments> generatePalindromeSource() {
+        return Stream.of(
+                Arguments.of("letetl",1),Arguments.of("aabb",2)
+        );
+    }
+
+
 }
 
 

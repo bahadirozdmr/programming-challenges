@@ -1,9 +1,13 @@
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import string.MinimumDeletion;
 import string.Palindrome;
+import structure.MaxHeap;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -76,6 +80,25 @@ public class ProgrammingChallengeTest {
        assertEquals(result,response);
     }
 
+    @ParameterizedTest
+    @MethodSource("generateWordLadderSource")
+    void generateWordLadderSource(String s,int result) {
+       var wordladder=new WordLadder();
+       var response=wordladder.ladderLength("hit","cog", Arrays.stream(new String[]{"hot","dot","dog","lot","log","cog" }).toList());
+        assertEquals(result,response);
+    }
+
+    @Test
+    void generateMaxHeap(){
+       System.out.println((4-1)/2);
+       var maxHeap=new MaxHeap(15);
+       maxHeap.insert(9);
+       maxHeap.insert(5);
+       maxHeap.insert(13);
+       maxHeap.insert(16);
+       maxHeap.insert(98);
+    }
+
     private static Stream<Arguments> generateCityTrafficSource() {
         return Stream.of(
                 Arguments.of((Object) new String[]{"1:[5]", "4:[5]", "3:[5]", "5:[1,4,3,2]", "2:[5,15,7]", "7:[2,8]", "8:[7,38]", "15:[2]", "38:[8]"}));
@@ -117,6 +140,12 @@ public class ProgrammingChallengeTest {
     private static Stream<Arguments> generatePalindromeSource() {
         return Stream.of(
                 Arguments.of("letetl",1),Arguments.of("aabb",2)
+        );
+    }
+
+    private static Stream<Arguments> generateWordLadderSource() {
+        return Stream.of(
+                Arguments.of("letetl",5)
         );
     }
 

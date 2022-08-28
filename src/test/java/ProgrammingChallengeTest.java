@@ -5,8 +5,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import string.MinimumDeletion;
 import string.Palindrome;
 import structure.MaxHeap;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -83,8 +81,19 @@ public class ProgrammingChallengeTest {
     @ParameterizedTest
     @MethodSource("generateWordLadderSource")
     void generateWordLadderSource(String s,int result) {
+       System.out.println(s);
        var wordladder=new WordLadder();
        var response=wordladder.ladderLength("hit","cog", Arrays.stream(new String[]{"hot","dot","dog","lot","log","cog" }).toList());
+        assertEquals(result,response);
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateLongestMountain")
+    void generateLongestMountain(int[] strArrays,int result) {
+       var longestMountain=new LongestMountain();
+       var response=longestMountain.findLongestMountain(strArrays);
+
+
         assertEquals(result,response);
     }
 
@@ -147,6 +156,11 @@ public class ProgrammingChallengeTest {
         return Stream.of(
                 Arguments.of("letetl",5)
         );
+    }
+
+    private static Stream<Arguments> generateLongestMountain(){
+        return Stream.of(
+                Arguments.of(new int[]{2,1,4,7,3,2,5},5),Arguments.of(new int[]{ 2,2,2 },0));
     }
 
 

@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import palindrome.LinkedList;
+import palindrome.LinkedListPalindrome;
 import string.MinimumDeletion;
 import string.Palindrome;
 import structure.MaxHeap;
@@ -98,6 +100,14 @@ public class ProgrammingChallengeTest {
     }
 
     @Test
+    void generateLRUCache(){
+       var lruCache=new LRUCache(2);
+       lruCache.put(1,123);
+       lruCache.put(2,21345);
+       lruCache.put(3,5555);
+    }
+
+    @Test
     void generateMaxHeap(){
        System.out.println((4-1)/2);
        var maxHeap=new MaxHeap(15);
@@ -106,6 +116,24 @@ public class ProgrammingChallengeTest {
        maxHeap.insert(13);
        maxHeap.insert(16);
        maxHeap.insert(98);
+    }
+
+    @Test
+    void generatePalindromeLinkedList(){
+       var intArray=new Integer[] {2,3,2,1};
+       var head=new LinkedList(1);
+        for (int i:intArray) {
+            LinkedList node=new LinkedList(i);
+            LinkedList temp=head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = node;
+        }
+        var linkedListPalindrome=new LinkedListPalindrome();
+        var response=linkedListPalindrome.isPalindromeCalculateWithStack(head);
+        var result=linkedListPalindrome.isPalindromeCalculate(head);
+        assertEquals(response,result);
     }
 
     private static Stream<Arguments> generateCityTrafficSource() {
